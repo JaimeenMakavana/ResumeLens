@@ -6,10 +6,10 @@ import { Bot } from "@/components/ui/icons";
 /**
  * Enhanced TypingIndicator component with sophisticated animation
  * and better visual design to indicate the AI is processing.
- */
+ */ 
 export function TypingIndicator() {
   return (
-    <div className="flex justify-start mb-6 px-4">
+    <div className="flex justify-start px-4 py-2">
       <div className="flex items-start gap-3">
         {/* Avatar */}
         <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center">

@@ -93,46 +93,52 @@ export function EmptyState({
   };
 
   return (
-    <div className="flex items-center justify-center h-full px-4 py-12">
-      <div className="max-w-2xl w-full text-center">
-        {/* Icon */}
-        <div className="flex justify-center mb-6">
-          <div className="flex items-center justify-center w-20 h-20 rounded-full bg-blue-100">
-            <MessageSquare className="w-10 h-10 text-blue-600" />
-          </div>
-        </div>
-
-        {/* Title and Description */}
-        <h3 className="text-2xl font-semibold text-gray-900 mb-2">{title}</h3>
-        <p className="text-gray-600 mb-8 max-w-md mx-auto">{description}</p>
-
+    <div className="w-full px-4 py-8">
+      <div className="max-w-2xl w-full mx-auto text-center">
+        <p className="text-[var(--text-secondary)] text-sm mb-6 max-w-md mx-auto leading-relaxed">
+          {description}
+        </p>
         {/* Suggested Questions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3">
           {questions.map((question) => (
-            <Card
+            <button
               key={question.id}
-              variant="interactive"
-              className="text-left cursor-pointer transition-all duration-200 hover:shadow-md hover:border-blue-300"
+              type="button"
+              className="w-full text-left 
+                rounded-lg 
+                border border-[var(--border-subtle)] 
+                bg-[var(--neutral-100)] 
+                p-4 
+                text-[var(--text-secondary)]
+                hover:shadow-[var(--shadow-sm)]
+                hover:border-[var(--border-default)]
+                hover:bg-[var(--neutral-50)]
+                transition-all duration-200 ease-in-out
+                focus:outline-none 
+                focus:ring-2 
+                focus:ring-[var(--border-default)]
+                focus:ring-offset-2"
               onClick={() => handleQuestionClick(question.text)}
             >
               <div className="flex items-start gap-3">
                 {question.icon && (
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 mt-0.5">
+                  <div
+                    className="flex-shrink-0 w-8 h-8 rounded-lg 
+                    bg-[var(--neutral-200)] 
+                    flex items-center justify-center 
+                    text-[var(--text-secondary)] 
+                    mt-0.5"
+                  >
                     {question.icon}
                   </div>
                 )}
-                <p className="text-sm text-gray-700 font-medium leading-relaxed">
+                <p className="text-sm text-[var(--text-primary)] leading-relaxed">
                   {question.text}
                 </p>
               </div>
-            </Card>
+            </button>
           ))}
         </div>
-
-        {/* Hint */}
-        <p className="text-xs text-gray-500 mt-6">
-          Click a question above or type your own to get started
-        </p>
       </div>
     </div>
   );

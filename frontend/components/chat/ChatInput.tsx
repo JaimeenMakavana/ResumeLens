@@ -68,18 +68,18 @@ export function ChatInput() {
   const maxLength = 2000;
 
   return (
-    <div className="border-t border-gray-200 bg-white">
+    <div className="border-t border-[var(--border-subtle)] bg-[var(--bg-elevated)]">
       <div className="px-6 py-4">
         {/* Character Count (optional, show when near limit) */}
         {characterCount > maxLength * 0.8 && (
           <div className="mb-2 text-right">
             <span
-              className={`text-xs ${
+              className={`text-xs transition-colors duration-200 ${
                 characterCount > maxLength
-                  ? "text-red-600"
+                  ? "text-[var(--neutral-600)]"
                   : characterCount > maxLength * 0.9
-                  ? "text-amber-600"
-                  : "text-gray-500"
+                  ? "text-[var(--accent-amber-600)]"
+                  : "text-[var(--text-secondary)]"
               }`}
             >
               {characterCount} / {maxLength}
@@ -89,10 +89,10 @@ export function ChatInput() {
 
         {/* Input Container */}
         <div
-          className={`flex items-end gap-3 p-3 rounded-xl border-2 transition-all duration-200 ${
+          className={`flex items-end gap-3 p-3 rounded-xl border transition-all duration-200 ease-in-out ${
             isFocused
-              ? "border-blue-500 bg-blue-50/50 shadow-sm"
-              : "border-gray-200 bg-gray-50"
+              ? "border-[var(--border-default)] bg-[var(--bg-elevated)] shadow-[var(--shadow-sm)]"
+              : "border-[var(--border-subtle)] bg-[var(--bg-elevated)]"
           }`}
         >
           {/* Textarea */}
@@ -111,7 +111,13 @@ export function ChatInput() {
               onBlur={() => setIsFocused(false)}
               disabled={isStreaming}
               placeholder="Ask a question..."
-              className="w-full resize-none bg-transparent border-none outline-none text-gray-900 placeholder-gray-500 text-base leading-relaxed focus:outline-none"
+              className="w-full resize-none bg-transparent border-none outline-none 
+                text-[var(--text-primary)] 
+                placeholder:text-[var(--text-tertiary)] 
+                text-base leading-relaxed 
+                focus:outline-none
+                disabled:text-[var(--text-disabled)]
+                disabled:cursor-not-allowed"
               rows={1}
               maxLength={maxLength}
               aria-label="Chat input"
@@ -120,48 +126,23 @@ export function ChatInput() {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            {/* Attach Button (Future) */}
-            <button
-              type="button"
-              className="p-2 rounded-lg text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={isStreaming}
-              aria-label="Attach file"
-              title="Attach file (coming soon)"
-            >
-              <Paperclip className="w-5 h-5" />
-            </button>
-
             {/* Send Button */}
             <Button
               onClick={handleSend}
               disabled={!canSend}
               loading={isStreaming}
-              className="rounded-lg px-4 py-2 min-w-[80px]"
+              className="rounded-lg"
               aria-label="Send message"
             >
               {isStreaming ? (
                 "Sending..."
               ) : (
                 <>
-                  <Send className="w-4 h-4 mr-1.5" />
-                  Send
+                  <Send className="w-4 h-4" />
                 </>
               )}
             </Button>
           </div>
-        </div>
-
-        {/* Keyboard Shortcut Hint */}
-        <div className="mt-2 text-xs text-gray-500 text-center">
-          Press{" "}
-          <kbd className="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs font-mono">
-            Enter
-          </kbd>{" "}
-          to send,{" "}
-          <kbd className="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs font-mono">
-            Shift + Enter
-          </kbd>{" "}
-          for new line
         </div>
       </div>
     </div>

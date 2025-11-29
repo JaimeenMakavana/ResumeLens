@@ -37,8 +37,10 @@ export function ChatMessage({
       >
         {/* Avatar */}
         <div
-          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-            isUser ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
+          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 ${
+            isUser 
+              ? "bg-[var(--accent-blue-500)] text-white" 
+              : "bg-[var(--neutral-200)] text-[var(--text-secondary)]"
           }`}
           aria-label={isUser ? "User" : "Assistant"}
         >
@@ -53,10 +55,10 @@ export function ChatMessage({
         >
           {/* Message Bubble */}
           <div
-            className={`relative rounded-2xl px-4 py-3 shadow-sm ${
+            className={`relative rounded-[1.5rem] px-4 py-3 transition-all duration-200 ${
               isUser
-                ? "bg-blue-600 text-white rounded-tr-sm"
-                : "bg-white text-gray-900 border border-gray-200 rounded-tl-sm"
+                ? "bg-[var(--accent-blue-500)] text-white rounded-tr-[0.375rem] shadow-[var(--shadow-sm)]"
+                : "bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-tl-[0.375rem] shadow-[var(--shadow-xs)]"
             }`}
           >
             {/* Content */}
@@ -88,16 +90,16 @@ export function ChatMessage({
 
             {/* Confidence Indicator (for assistant messages) */}
             {!isUser && message.confidence !== undefined && (
-              <div className="mt-2 pt-2 border-t border-gray-200">
+              <div className="mt-2 pt-2 border-t border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="flex-1 h-1.5 bg-[var(--neutral-200)] rounded-full overflow-hidden">
                     <div
-                      className={`h-full ${
+                      className={`h-full transition-all duration-300 ${
                         message.confidence > 0.7
-                          ? "bg-green-500"
+                          ? "bg-[var(--accent-green-500)]"
                           : message.confidence > 0.4
-                          ? "bg-amber-500"
-                          : "bg-red-500"
+                          ? "bg-[var(--accent-amber-500)]"
+                          : "bg-[var(--neutral-500)]"
                       }`}
                       style={{ width: `${message.confidence * 100}%` }}
                       aria-label={`Confidence: ${Math.round(
@@ -105,7 +107,7 @@ export function ChatMessage({
                       )}%`}
                     />
                   </div>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-[var(--text-secondary)]">
                     {Math.round(message.confidence * 100)}% confidence
                   </span>
                 </div>
@@ -120,18 +122,18 @@ export function ChatMessage({
                 isUser ? "flex-row-reverse" : "flex-row"
               }`}
             >
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-[var(--text-secondary)]">
                 {formatTimestamp(message.timestamp || Date.now())}
               </span>
               {!isUser &&
                 message.chunksUsed &&
                 message.chunksUsed.length > 0 && (
-                  <span className="text-xs text-gray-400">•</span>
+                  <span className="text-xs text-[var(--text-tertiary)]">•</span>
                 )}
               {!isUser &&
                 message.chunksUsed &&
                 message.chunksUsed.length > 0 && (
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-[var(--text-secondary)]">
                     {message.chunksUsed.length} source
                     {message.chunksUsed.length > 1 ? "s" : ""}
                   </span>

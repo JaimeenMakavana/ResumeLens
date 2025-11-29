@@ -1,8 +1,61 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   Soft Minimal Neutrals Design System - CSS Variables
+   ============================================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
+  /* Base Background & Foreground */
+  --background: #fafaf9; /* neutral-50 - warm off-white */
+  --foreground: #292524;  /* neutral-800 - very dark warm gray */
+
+  /* Neutral Palette (Warm Grays) */
+  --neutral-50: #fafaf9;
+  --neutral-100: #f5f5f4;
+  --neutral-200: #e7e5e4;
+  --neutral-300: #d6d3d1;
+  --neutral-400: #a8a29e;
+  --neutral-500: #78716c;
+  --neutral-600: #57534e;
+  --neutral-700: #44403c;
+  --neutral-800: #292524;
+  --neutral-900: #1c1917;
+
+  /* Muted Accent Colors */
+  --accent-blue-50: #f0f4f8;
+  --accent-blue-100: #dbe4ed;
+  --accent-blue-200: #b8c9d9;
+  --accent-blue-500: #6b8ca8;
+  --accent-blue-600: #5a7a94;
+  --accent-blue-700: #4a6679;
+
+  --accent-green-50: #f4f6f3;
+  --accent-green-500: #8b9a7f;
+  --accent-green-600: #7a8770;
+
+  --accent-amber-50: #faf8f4;
+  --accent-amber-500: #c4a882;
+  --accent-amber-600: #b0976f;
+
+  /* Semantic Colors */
+  --text-primary: #292524;
+  --text-secondary: #57534e;
+  --text-tertiary: #78716c;
+  --text-disabled: #a8a29e;
+
+  --bg-base: #fafaf9;
+  --bg-elevated: #ffffff;
+  --bg-overlay: rgba(28, 25, 23, 0.4);
+
+  --border-subtle: rgba(120, 113, 108, 0.12);
+  --border-default: rgba(120, 113, 108, 0.2);
+  --border-emphasis: rgba(120, 113, 108, 0.3);
+
+  /* Soft Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(28, 25, 23, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(28, 25, 23, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(28, 25, 23, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(28, 25, 23, 0.1);
 }
 
 @theme inline {
@@ -19,9 +72,15 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  margin: 0;
+  overflow: hidden;
 }
 
-/* V2 Chat Animations */
+/* ============================================================================
+   Soft Minimal Neutrals - Animations (Gentle, Calm)
+   ============================================================================ */
+
+/* Message fade-in animation (gentle, slow) */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -35,6 +94,20 @@ body {
 
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
+}
+
+/* Soft pulse animation for loading states */
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
 }
 
 /* Subtle bounce animation for scroll button */
