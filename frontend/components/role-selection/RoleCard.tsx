@@ -7,7 +7,7 @@ interface RoleCardProps {
   description: string;
   icon: React.ReactNode;
   sourceType: SourceType;
-  onSelect: (sourceType: SourceType) => void;
+  onSelect?: (sourceType: SourceType) => void;
 }
 
 export function RoleCard({
@@ -20,13 +20,13 @@ export function RoleCard({
   return (
     <div
       className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-gray-100 p-8 text-center cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-      onClick={() => onSelect(sourceType)}
+      onClick={() => onSelect?.(sourceType)}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onSelect(sourceType);
+          onSelect?.(sourceType);
         }
       }}
       aria-label={`Select ${title} role`}
@@ -41,4 +41,3 @@ export function RoleCard({
     </div>
   );
 }
-
