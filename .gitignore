@@ -1,0 +1,40 @@
+## Node / Next.js
+node_modules/
+.next/
+out/
+.vercel/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+## Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+python-service/.pytest_cache/
+python-service/.mypy_cache/
+
+## OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+## Project-specific
+.cursor/
+.env
+.env.*
+frontend/.next/
+frontend/.turbo/
+frontend/coverage/
+python-service/.env
+
+
