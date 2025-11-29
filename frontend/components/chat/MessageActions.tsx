@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Copy, RotateCw, ThumbsUp, ThumbsDown, MoreVertical } from "@/components/ui/icons";
+import {
+  Copy,
+  RotateCw,
+  ThumbsUp,
+  ThumbsDown,
+  MoreVertical,
+} from "@/components/ui/icons";
 import { Button } from "@/components/ui";
 
 interface MessageActionsProps {
@@ -39,7 +45,8 @@ export function MessageActions({
 
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isOpen]);
 
@@ -139,4 +146,3 @@ export function MessageActions({
     </div>
   );
 }
-

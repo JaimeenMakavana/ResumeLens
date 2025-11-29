@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
-import { Card } from "@/components/ui";
+import { useCallback, useRef, useState } from "react";
 
 interface FileDropzoneProps {
   onFileSelect: (file: File) => void;
@@ -15,6 +14,7 @@ export function FileDropzone({
   disabled = false,
 }: FileDropzoneProps) {
   const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -53,28 +53,36 @@ export function FileDropzone({
     [onFileSelect]
   );
 
+  const handleClick = useCallback(() => {
+    if (!disabled && fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  }, [disabled]);
+
   return (
-    <Card
-      variant={isDragging ? "elevated" : "default"}
-      className={`border-2 border-dashed ${
+    <div
+      className={`relative bg-white/90 backdrop-blur-sm rounded-xl border-2 border-dashed ${
         isDragging
-          ? "border-blue-500 bg-blue-50"
-          : "border-gray-300 hover:border-gray-400"
-      } transition-colors ${disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}`}
+          ? "border-blue-400 bg-blue-50/50"
+          : "border-blue-200 hover:border-blue-300"
+      } transition-all duration-200 ${disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
+      onClick={handleClick}
     >
-      <label className="flex flex-col items-center justify-center py-8 cursor-pointer">
-        <input
-          type="file"
-          accept={accept}
-          onChange={handleFileInput}
-          disabled={disabled}
-          className="hidden"
-        />
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept={accept}
+        onChange={handleFileInput}
+        disabled={disabled}
+        className="hidden"
+      />
+      <div className="flex flex-col items-center justify-center py-12 px-6">
+        {/* Cloud upload icon */}
         <svg
-          className="w-12 h-12 text-gray-400 mb-4"
+          className="w-16 h-16 text-gray-400 mb-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -82,17 +90,31 @@ export function FileDropzone({
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2}
+            strokeWidth={1.5}
             d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
           />
         </svg>
-        <p className="text-sm font-medium text-gray-700">
-          {isDragging ? "Drop file here" : "Drag and drop file here"}
+        
+        {/* Upload text */}
+        <p className="text-base font-bold text-gray-900 mb-1">
+          Drag and drop file here
         </p>
-        <p className="text-xs text-gray-500 mt-1">or click to browse</p>
-        <p className="text-xs text-gray-400 mt-2">PDF, DOCX, or TXT</p>
-      </label>
-    </Card>
+        <p className="text-sm text-gray-500 mb-4">or click to browse</p>
+        
+        {/* Browse Files button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClick();
+          }}
+          disabled={disabled}
+          className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg transition-colors border border-gray-300"
+        >
+          Browse Files
+        </button>
+      </div>
+    </div>
   );
 }
 

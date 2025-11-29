@@ -11,6 +11,7 @@ This document outlines the complete redesign of the agentic view (chat interface
 ### Current Architecture
 
 **Files Analyzed:**
+
 - `frontend/app/recruiter/chat/page.tsx`
 - `frontend/app/job-seeker/chat/page.tsx`
 - `frontend/components/chat/ChatContainer.tsx`
@@ -25,6 +26,7 @@ This document outlines the complete redesign of the agentic view (chat interface
 #### 1. Structural & Layout Issues
 
 **Problems:**
+
 - Basic flex layout with minimal visual hierarchy
 - No integrated header within chat container
 - Session controls separated in parent layout, not contextual to chat
@@ -37,6 +39,7 @@ This document outlines the complete redesign of the agentic view (chat interface
 #### 2. Visual Design Problems
 
 **Problems:**
+
 - Minimal spacing (only `p-4`, `gap-2`)
 - Flat design with no elevation or shadows
 - Basic message bubbles with no visual distinction
@@ -50,6 +53,7 @@ This document outlines the complete redesign of the agentic view (chat interface
 #### 3. UX & Interaction Issues
 
 **Problems:**
+
 - Empty state is plain text, no suggested questions
 - Snippet sources hidden behind toggle, hard to discover
 - No message timestamps
@@ -64,6 +68,7 @@ This document outlines the complete redesign of the agentic view (chat interface
 #### 4. Accessibility Problems
 
 **Problems:**
+
 - Limited ARIA labels on interactive elements
 - Snippet toggle button lacks proper labeling
 - No skip links or keyboard navigation hints
@@ -76,6 +81,7 @@ This document outlines the complete redesign of the agentic view (chat interface
 #### 5. Code Quality & Maintainability
 
 **Problems:**
+
 - Components are functional but could be more modular
 - Missing prop interfaces with JSDoc
 - No error boundaries for chat components
@@ -128,24 +134,28 @@ This document outlines the complete redesign of the agentic view (chat interface
 ### Visual Language
 
 #### Color Palette
+
 - **Primary**: Blue-600/700 for user messages and CTAs
 - **Secondary**: Gray-50/100/200 for AI messages and backgrounds
 - **Accent**: Green for success states, Amber for warnings
 - **Text**: Gray-900 for primary, Gray-600 for secondary
 
 #### Typography Scale
+
 - **Headings**: text-2xl (24px) for section titles
 - **Body**: text-base (16px) with leading-relaxed
 - **Labels**: text-sm (14px) for metadata
 - **Captions**: text-xs (12px) for timestamps and hints
 
 #### Spacing System
+
 - **Tight**: gap-2 (8px) for inline elements
 - **Base**: gap-4 (16px) for component spacing
 - **Loose**: gap-6 (24px) for section separation
 - **Padding**: p-4 (16px) base, p-6 (24px) for containers
 
 #### Elevation & Shadows
+
 - **Level 0**: No shadow (default)
 - **Level 1**: shadow-sm for subtle elevation (cards)
 - **Level 2**: shadow-md for interactive elements (hover)
@@ -158,15 +168,18 @@ This document outlines the complete redesign of the agentic view (chat interface
 ### New & Enhanced Components
 
 #### 1. **ChatHeader** (New)
+
 **Purpose:** Integrated header within chat container with session info
 
 **Features:**
+
 - Title with contextual icon
 - Session status badge with live countdown
 - Clear session button (with confirmation)
 - Responsive mobile layout
 
 **Props:**
+
 ```typescript
 interface ChatHeaderProps {
   title: string;
@@ -177,9 +190,11 @@ interface ChatHeaderProps {
 ```
 
 #### 2. **ChatMessage** (Enhanced)
+
 **Purpose:** Enhanced message bubble with actions and metadata
 
 **Enhancements:**
+
 - Timestamp display
 - Message actions (copy, regenerate)
 - Better visual distinction (shadows, borders)
@@ -187,6 +202,7 @@ interface ChatHeaderProps {
 - Proper avatar/icon indicators
 
 **Props:**
+
 ```typescript
 interface ChatMessageProps {
   message: Message;
@@ -196,18 +212,22 @@ interface ChatMessageProps {
 ```
 
 #### 3. **MessageActions** (New)
+
 **Purpose:** Actions menu for individual messages
 
 **Features:**
+
 - Copy to clipboard
 - Regenerate (future)
 - Feedback (future)
 - Keyboard accessible dropdown
 
 #### 4. **SnippetSources** (Enhanced)
+
 **Purpose:** Improved snippet display with better UX
 
 **Enhancements:**
+
 - Card-based design with proper elevation
 - Expandable/collapsible with smooth animation
 - Chunk preview with highlighting
@@ -215,18 +235,22 @@ interface ChatMessageProps {
 - Icons for visual clarity
 
 #### 5. **EmptyState** (New)
+
 **Purpose:** Engaging empty state with suggested questions
 
 **Features:**
+
 - Friendly illustration or icon
 - Suggested question prompts
 - Clickable suggestions that populate input
 - Clear call-to-action
 
 #### 6. **ChatInput** (Enhanced)
+
 **Purpose:** Improved input with better UX
 
 **Enhancements:**
+
 - Auto-resizing textarea
 - Better visual styling (rounded, shadow)
 - Character count (optional)
@@ -234,17 +258,21 @@ interface ChatMessageProps {
 - Keyboard shortcuts hint
 
 #### 7. **TypingIndicator** (Enhanced)
+
 **Purpose:** More sophisticated typing animation
 
 **Enhancements:**
+
 - Animated dots with better timing
 - Subtle pulse animation
 - Optional message preview
 
 #### 8. **MessageList** (Enhanced)
+
 **Purpose:** Improved message list container
 
 **Enhancements:**
+
 - Better scroll behavior
 - Smooth animations on new messages
 - Scroll-to-bottom button (when scrolled up)
@@ -257,6 +285,7 @@ interface ChatMessageProps {
 ### Chat Container Structure
 
 **V1 Structure:**
+
 ```tsx
 <div className="flex flex-col h-full">
   <MessageList />
@@ -265,6 +294,7 @@ interface ChatMessageProps {
 ```
 
 **V2 Structure:**
+
 ```tsx
 <div className="flex flex-col h-full bg-gray-50">
   <ChatHeader />
@@ -279,10 +309,12 @@ interface ChatMessageProps {
 ### Page Layout Improvements
 
 **V1:**
+
 - Basic container with fixed height calculations
 - Simple border around chat
 
 **V2:**
+
 - Full-height layout with proper viewport handling
 - Gradient background or subtle pattern
 - Better responsive breakpoints
@@ -295,12 +327,14 @@ interface ChatMessageProps {
 ### User Flows
 
 #### Flow 1: First-Time User
+
 1. User sees empty state with suggested questions
 2. User clicks suggestion → populates input
 3. User sends message → sees typing indicator
 4. User receives response with snippet sources
 
 #### Flow 2: Ongoing Conversation
+
 1. User types in enhanced input (auto-resize)
 2. User sends via button or Enter key
 3. Message appears with fade-in animation
@@ -309,6 +343,7 @@ interface ChatMessageProps {
 6. User can copy message or perform actions
 
 #### Flow 3: Session Management
+
 1. User sees session status in header
 2. User clicks clear → confirmation dialog
 3. Session cleared → returns to empty state
@@ -368,24 +403,28 @@ interface ChatMessageProps {
 ## Part 8: Implementation Plan
 
 ### Phase 1: Core Components (Priority 1)
+
 1. Create `ChatHeader` component
 2. Enhance `ChatMessage` with timestamps and actions
 3. Create `EmptyState` with suggestions
 4. Enhance `SnippetSources` design
 
 ### Phase 2: Input & Interactions (Priority 2)
+
 1. Enhance `ChatInput` with auto-resize
 2. Create `MessageActions` component
 3. Improve `TypingIndicator` animation
 4. Add scroll-to-bottom button
 
 ### Phase 3: Polish & Accessibility (Priority 3)
+
 1. Add animations and transitions
 2. Implement keyboard shortcuts
 3. Enhance ARIA labels
 4. Add error boundaries
 
 ### Phase 4: Advanced Features (Future)
+
 1. Message regeneration
 2. Feedback system
 3. Export conversation
@@ -415,6 +454,7 @@ components/chat/
 ### Type Definitions
 
 All components will have:
+
 - Full TypeScript interfaces
 - JSDoc comments for public APIs
 - Prop validation where needed
@@ -432,24 +472,28 @@ All components will have:
 ## Part 10: Success Metrics
 
 ### Visual Quality
+
 - ✅ Modern, polished appearance
 - ✅ Clear visual hierarchy
 - ✅ Consistent spacing and typography
 - ✅ Professional color usage
 
 ### UX Quality
+
 - ✅ Intuitive user flows
 - ✅ Engaging empty state
 - ✅ Clear feedback for all actions
 - ✅ Smooth animations
 
 ### Accessibility
+
 - ✅ WCAG 2.1 AA compliance
 - ✅ Full keyboard navigation
 - ✅ Screen reader friendly
 - ✅ High contrast support
 
 ### Code Quality
+
 - ✅ Clean, modular components
 - ✅ Proper TypeScript types
 - ✅ Reusable patterns
@@ -460,4 +504,3 @@ All components will have:
 ## Conclusion
 
 This V2 redesign transforms the agentic view from a functional interface into a polished, modern experience that delights users while maintaining all existing functionality. The new design follows best practices for React/Next.js development, accessibility, and visual design.
-

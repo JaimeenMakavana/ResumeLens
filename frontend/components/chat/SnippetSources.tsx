@@ -45,7 +45,9 @@ export function SnippetSources({ sources, chunks }: SnippetSourcesProps) {
         onClick={toggleExpanded}
         className="w-full flex items-center justify-between text-left group"
         aria-expanded={isExpanded}
-        aria-label={`${isExpanded ? "Hide" : "Show"} ${sources.length} source${sources.length > 1 ? "s" : ""}`}
+        aria-label={`${isExpanded ? "Hide" : "Show"} ${sources.length} source${
+          sources.length > 1 ? "s" : ""
+        }`}
       >
         <div className="flex items-center gap-2">
           <Link2 className="w-4 h-4 text-gray-500 group-hover:text-blue-600 transition-colors" />

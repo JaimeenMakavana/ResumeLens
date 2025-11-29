@@ -352,3 +352,165 @@ export function Link2({ className = "w-4 h-4", size }: IconProps) {
   );
 }
 
+// Custom 3D Briefcase icon with split blue/purple colors
+export function Briefcase3D({ className = "w-24 h-24", size }: IconProps) {
+  const sizeClass = size ? `w-${size} h-${size}` : className;
+  return (
+    <svg
+      className={sizeClass}
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Briefcase body - left half - vibrant light blue */}
+      <rect
+        x="20"
+        y="40"
+        width="50"
+        height="40"
+        rx="4"
+        fill="#60A5FA"
+        stroke="#3B82F6"
+        strokeWidth="2"
+      />
+      {/* Briefcase body - right half - rich purple */}
+      <rect
+        x="50"
+        y="40"
+        width="50"
+        height="40"
+        rx="4"
+        fill="#A78BFA"
+        stroke="#8B5CF6"
+        strokeWidth="2"
+      />
+      {/* White clasp in the middle */}
+      <rect
+        x="48"
+        y="38"
+        width="4"
+        height="44"
+        fill="#FFFFFF"
+        stroke="#E5E7EB"
+        strokeWidth="1"
+        rx="1"
+      />
+      {/* Top handle - white */}
+      <path
+        d="M45 40 Q60 28 75 40"
+        fill="white"
+        stroke="#E5E7EB"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      {/* Inner handle arc */}
+      <path
+        d="M48 42 Q60 32 72 42"
+        fill="none"
+        stroke="#F3F4F6"
+        strokeWidth="1.5"
+      />
+      {/* 3D perspective - left side shadow */}
+      <polygon
+        points="20,40 25,35 25,75 20,80"
+        fill="#3B82F6"
+        opacity="0.25"
+      />
+      {/* 3D perspective - top highlight */}
+      <line
+        x1="20"
+        y1="40"
+        x2="100"
+        y2="40"
+        stroke="#E0E7FF"
+        strokeWidth="2"
+        opacity="0.6"
+      />
+    </svg>
+  );
+}
+
+// Custom Magnifying glass with data visualization elements
+export function SearchWithData({ className = "w-24 h-24", size }: IconProps) {
+  const sizeClass = size ? `w-${size} h-${size}` : className;
+  return (
+    <svg
+      className={sizeClass}
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Magnifying glass circle - light grey lens */}
+      <circle
+        cx="50"
+        cy="50"
+        r="28"
+        fill="#F3F4F6"
+        stroke="#9CA3AF"
+        strokeWidth="2.5"
+      />
+      {/* Lens inner highlight */}
+      <circle
+        cx="48"
+        cy="48"
+        r="12"
+        fill="#E5E7EB"
+        opacity="0.6"
+      />
+      {/* Magnifying glass handle - grey */}
+      <line
+        x1="72"
+        y1="72"
+        x2="88"
+        y2="88"
+        stroke="#6B7280"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      {/* Data visualization elements - purple dot connected to grey dot */}
+      <circle
+        cx="82"
+        cy="28"
+        r="7"
+        fill="#A78BFA"
+      />
+      <line
+        x1="82"
+        y1="28"
+        x2="93"
+        y2="38"
+        stroke="#6B7280"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <circle
+        cx="93"
+        cy="38"
+        r="5"
+        fill="#9CA3AF"
+      />
+      {/* Horizontal grey lines below */}
+      <line
+        x1="75"
+        y1="52"
+        x2="102"
+        y2="52"
+        stroke="#9CA3AF"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <line
+        x1="78"
+        y1="60"
+        x2="100"
+        y2="60"
+        stroke="#9CA3AF"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+

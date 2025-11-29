@@ -18,12 +18,13 @@ export function SessionStatus() {
 
   const minutes = Math.floor(timeRemaining / 60000);
   const seconds = Math.floor((timeRemaining % 60000) / 1000);
+  const formattedSeconds = seconds.toString().padStart(2, "0");
 
   return (
     <div className="text-sm">
       <span
         className={`inline-flex items-center gap-1 ${
-          isActive ? "text-green-600" : "text-red-600"
+          isActive ? "text-green-600 font-medium" : "text-red-600"
         }`}
       >
         <span
@@ -32,7 +33,7 @@ export function SessionStatus() {
           }`}
         ></span>
         {isActive
-          ? `Active • ${minutes}m ${seconds}s remaining`
+          ? `Active • ${minutes}m ${formattedSeconds}s remaining`
           : "Expired"}
       </span>
     </div>

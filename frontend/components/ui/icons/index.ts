@@ -20,4 +20,6 @@ export {
   Sparkles,
   Search,
   Link2,
+  Briefcase3D,
+  SearchWithData,
 } from "./IconComponents";

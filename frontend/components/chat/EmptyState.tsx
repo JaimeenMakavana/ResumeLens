@@ -1,7 +1,13 @@
 "use client";
 
 import React from "react";
-import { Sparkles, FileText, Briefcase, Search, MessageSquare } from "@/components/ui/icons";
+import {
+  Sparkles,
+  FileText,
+  Briefcase,
+  Search,
+  MessageSquare,
+} from "@/components/ui/icons";
 import { Card } from "@/components/ui";
 
 interface SuggestedQuestion {
@@ -131,4 +137,3 @@ export function EmptyState({
     </div>
   );
 }
-

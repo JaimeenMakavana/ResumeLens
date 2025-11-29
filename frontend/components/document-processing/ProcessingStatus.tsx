@@ -4,7 +4,7 @@ import { LoadingSpinner } from "@/components/ui";
 import { useDocumentStore } from "@/stores/documentStore";
 
 export function ProcessingStatus() {
-  const { status, progress, error } = useDocumentStore();
+  const { status, progress, error, fileName, fileType } = useDocumentStore();
 
   if (status === "idle") {
     return null;
@@ -19,25 +19,30 @@ export function ProcessingStatus() {
   };
 
   return (
-    <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-      <div className="flex items-center gap-3">
-        {status !== "ready" && status !== "error" && (
-          <LoadingSpinner size="sm" />
-        )}
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-700">
-            {statusMessages[status]}
-          </p>
-          {status !== "ready" && status !== "error" && (
-            <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+    <div className="mt-4 p-4 bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200">
+      <p className="text-sm font-medium text-gray-900 mb-3">
+        {statusMessages[status]}
+      </p>
+      {status !== "ready" && status !== "error" && (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="w-full bg-gray-200 rounded-full h-2 mr-3">
               <div
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
+            <span className="text-sm text-gray-600 font-medium whitespace-nowrap">
+              {progress}%
+            </span>
+          </div>
+          {fileName && (
+            <p className="text-sm text-gray-700">
+              Processing {fileName} ({fileType?.toUpperCase()})
+            </p>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 }
