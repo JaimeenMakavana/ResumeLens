@@ -1,6 +1,5 @@
 "use client";
 
-import { Card } from "@/components/ui";
 import { SourceType } from "@/types";
 
 interface RoleCardProps {
@@ -19,17 +18,27 @@ export function RoleCard({
   onSelect,
 }: RoleCardProps) {
   return (
-    <Card
-      variant="interactive"
-      className="text-center"
+    <div
+      className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-gray-100 p-8 text-center cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
       onClick={() => onSelect(sourceType)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect(sourceType);
+        }
+      }}
+      aria-label={`Select ${title} role`}
     >
-      <div className="flex flex-col items-center space-y-4">
-        <div className="text-4xl">{icon}</div>
-        <h3 className="text-xl font-semibold">{title}</h3>
-        <p className="text-sm text-gray-600">{description}</p>
+      <div className="flex flex-col items-center space-y-6">
+        <div className="flex items-center justify-center mb-2">{icon}</div>
+        <h3 className="text-2xl font-bold text-gray-900">{title}</h3>
+        <p className="text-sm text-gray-600 leading-relaxed max-w-sm">
+          {description}
+        </p>
       </div>
-    </Card>
+    </div>
   );
 }
 

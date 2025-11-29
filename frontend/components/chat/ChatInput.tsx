@@ -33,9 +33,15 @@ export function ChatInput() {
       textareaRef.current?.focus();
     };
 
-    window.addEventListener("suggested-question-selected", handleQuestionSelected);
+    window.addEventListener(
+      "suggested-question-selected",
+      handleQuestionSelected
+    );
     return () => {
-      window.removeEventListener("suggested-question-selected", handleQuestionSelected);
+      window.removeEventListener(
+        "suggested-question-selected",
+        handleQuestionSelected
+      );
     };
   }, []);
 
@@ -147,8 +153,15 @@ export function ChatInput() {
 
         {/* Keyboard Shortcut Hint */}
         <div className="mt-2 text-xs text-gray-500 text-center">
-          Press <kbd className="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs font-mono">Enter</kbd> to send,{" "}
-          <kbd className="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs font-mono">Shift + Enter</kbd> for new line
+          Press{" "}
+          <kbd className="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs font-mono">
+            Enter
+          </kbd>{" "}
+          to send,{" "}
+          <kbd className="px-1.5 py-0.5 bg-gray-100 border border-gray-300 rounded text-xs font-mono">
+            Shift + Enter
+          </kbd>{" "}
+          for new line
         </div>
       </div>
     </div>

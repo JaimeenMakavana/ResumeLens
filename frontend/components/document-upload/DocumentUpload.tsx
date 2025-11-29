@@ -2,6 +2,7 @@
 
 import { FileDropzone } from "./FileDropzone";
 import { TextPasteArea } from "./TextPasteArea";
+import { FileTypeIndicators } from "./FileTypeIndicators";
 import { DocumentPreview } from "./DocumentPreview";
 import { ProcessingStatus } from "../document-processing/ProcessingStatus";
 import { useDocumentUpload } from "@/hooks/useDocumentUpload";
@@ -19,15 +20,19 @@ export function DocumentUpload({
 }: DocumentUploadProps) {
   const { handleFileSelect, handleTextPaste, isProcessing, error } =
     useDocumentUpload(sourceType);
-  const { status } = useDocumentStore();
+  const { status, fileName, rawText } = useDocumentStore();
+  const hasDocument = !!fileName || !!rawText;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {!showTextPaste ? (
-        <FileDropzone
-          onFileSelect={handleFileSelect}
-          disabled={isProcessing || status !== "idle"}
-        />
+        <>
+          <FileDropzone
+            onFileSelect={handleFileSelect}
+            disabled={isProcessing || status !== "idle"}
+          />
+          <FileTypeIndicators />
+        </>
       ) : (
         <TextPasteArea
           onTextSubmit={(text) => handleTextPaste(text, sourceType)}
@@ -42,8 +47,6 @@ export function DocumentUpload({
           <p className="text-sm text-red-600">{error}</p>
         </div>
       )}
-
-      <DocumentPreview />
     </div>
   );
 }

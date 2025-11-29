@@ -26,27 +26,31 @@ export function ChatMessage({
 
   return (
     <div
-      className={`group flex ${isUser ? "justify-end" : "justify-start"} mb-6 px-4 animate-fade-in`}
+      className={`group flex ${
+        isUser ? "justify-end" : "justify-start"
+      } mb-6 px-4 animate-fade-in`}
     >
-      <div className={`flex items-start gap-3 max-w-[85%] ${isUser ? "flex-row-reverse" : "flex-row"}`}>
+      <div
+        className={`flex items-start gap-3 max-w-[85%] ${
+          isUser ? "flex-row-reverse" : "flex-row"
+        }`}
+      >
         {/* Avatar */}
         <div
           className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-            isUser
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700"
+            isUser ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
           }`}
           aria-label={isUser ? "User" : "Assistant"}
         >
-          {isUser ? (
-            <User className="w-4 h-4" />
-          ) : (
-            <Bot className="w-4 h-4" />
-          )}
+          {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
         </div>
 
         {/* Message Content */}
-        <div className={`flex flex-col ${isUser ? "items-end" : "items-start"} gap-1`}>
+        <div
+          className={`flex flex-col ${
+            isUser ? "items-end" : "items-start"
+          } gap-1`}
+        >
           {/* Message Bubble */}
           <div
             className={`relative rounded-2xl px-4 py-3 shadow-sm ${
@@ -71,7 +75,9 @@ export function ChatMessage({
 
             {/* Message Actions */}
             {showActions && (
-              <div className={`absolute top-2 ${isUser ? "left-2" : "right-2"}`}>
+              <div
+                className={`absolute top-2 ${isUser ? "left-2" : "right-2"}`}
+              >
                 <MessageActions
                   messageId={message.id}
                   content={message.content}
@@ -94,7 +100,9 @@ export function ChatMessage({
                           : "bg-red-500"
                       }`}
                       style={{ width: `${message.confidence * 100}%` }}
-                      aria-label={`Confidence: ${Math.round(message.confidence * 100)}%`}
+                      aria-label={`Confidence: ${Math.round(
+                        message.confidence * 100
+                      )}%`}
                     />
                   </div>
                   <span className="text-xs text-gray-500">
@@ -107,18 +115,27 @@ export function ChatMessage({
 
           {/* Timestamp and Metadata */}
           {showTimestamp && (
-            <div className={`flex items-center gap-2 px-1 ${isUser ? "flex-row-reverse" : "flex-row"}`}>
+            <div
+              className={`flex items-center gap-2 px-1 ${
+                isUser ? "flex-row-reverse" : "flex-row"
+              }`}
+            >
               <span className="text-xs text-gray-500">
                 {formatTimestamp(message.timestamp || Date.now())}
               </span>
-              {!isUser && message.chunksUsed && message.chunksUsed.length > 0 && (
-                <span className="text-xs text-gray-400">•</span>
-              )}
-              {!isUser && message.chunksUsed && message.chunksUsed.length > 0 && (
-                <span className="text-xs text-gray-500">
-                  {message.chunksUsed.length} source{message.chunksUsed.length > 1 ? "s" : ""}
-                </span>
-              )}
+              {!isUser &&
+                message.chunksUsed &&
+                message.chunksUsed.length > 0 && (
+                  <span className="text-xs text-gray-400">•</span>
+                )}
+              {!isUser &&
+                message.chunksUsed &&
+                message.chunksUsed.length > 0 && (
+                  <span className="text-xs text-gray-500">
+                    {message.chunksUsed.length} source
+                    {message.chunksUsed.length > 1 ? "s" : ""}
+                  </span>
+                )}
             </div>
           )}
         </div>

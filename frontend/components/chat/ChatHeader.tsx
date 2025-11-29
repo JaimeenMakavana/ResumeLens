@@ -36,7 +36,9 @@ export function ChatHeader({
             <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
             {sourceType && (
               <p className="text-xs text-gray-500 capitalize">
-                {sourceType === "resume" ? "Resume Analysis" : "Job Description"}
+                {sourceType === "resume"
+                  ? "Resume Analysis"
+                  : "Job Description"}
               </p>
             )}
           </div>
@@ -55,4 +57,3 @@ export function ChatHeader({
     </header>
   );
 }
-

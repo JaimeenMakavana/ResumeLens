@@ -25,7 +25,7 @@ export function ClearSessionButton() {
 
   return (
     <Button
-      variant={isConfirming ? "danger" : "outline"}
+      variant={isConfirming ? "danger" : "primary"}
       size="sm"
       onClick={handleClear}
     >

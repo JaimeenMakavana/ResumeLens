@@ -9,7 +9,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   --font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Fira Mono",
     "Droid Sans Mono", "Courier New", monospace;
 }
@@ -38,7 +39,8 @@ body {
 
 /* Subtle bounce animation for scroll button */
 @keyframes bounce-subtle {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {

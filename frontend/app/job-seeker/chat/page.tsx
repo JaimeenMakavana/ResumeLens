@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 /**
  * Job Seeker Chat Page - V2 Redesign
- * 
+ *
  * Enhanced layout with better spacing, full-height container,
  * and improved responsive design.
  */
